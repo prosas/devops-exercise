@@ -1,15 +1,15 @@
 Desafio Vaga Devops
 ===================
 
-A ideia desse desafio é nos permitir avaliar melhor as habilidades de 
+A ideia desse desafio é nos permitir avaliar melhor as habilidades de
 candidatos à vaga de devops/infra, de vários níveis.
 
 ## Atenção
 
-Também serão aceitos projetos já desenvolvidos, de autoria própria, 
-que atendam os critérios listados na seção Avaliação. 
+Também serão aceitos projetos já desenvolvidos, de autoria própria,
+que atendam os critérios listados na seção Avaliação.
 
-Se esse for o caso, basta enviar o ZIP do projeto para o email 
+Se esse for o caso, basta enviar o ZIP do projeto para o email
 leo@prosas.com.br com o título Desafio Vaga Devops.
 
 Instruções de entrega
@@ -23,15 +23,16 @@ Instruções de entrega
 Desafio
 -------
 
-Você recebeu um projeto de API de listagem de editais em ruby on rails (esse 
+Você recebeu um projeto de API de listagem de editais em ruby on rails (esse
 repo), sem muita documentação e precisa configurar seu deploy via Docker.
 
 Sua solução deve:
 
 - Criar a imagem Docker do projeto
-- Disponibilizar servidor de aplicação via docker-compose
-- Disponibilizar proxy reverso da aplicação nginx ou traefik via docker-compose
-- Fazer balanceamento de carga dos request em 3 instâncias
+- Disponibilizar via docker-compose:
+    - 3 instâncias do servidor de aplicação
+    - proxy reverso utilizando nginx ou traefik
+    - balanceamento de carga entre instâncias da aplicação
 
 Avaliação
 ---------
