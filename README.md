@@ -18,7 +18,7 @@ Instruções de entrega
 - Faça um fork desse repositório
 - Faça commits conforme for terminando funcionalidades
 - Crie instruções de execução via Docker em seu README.md
-- Por fim, envie o link do repositório + currículo/Linkedin para avaliarmos
+- Por fim, envie o link do repositório para avaliarmos
 
 Desafio
 -------
