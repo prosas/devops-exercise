@@ -1,6 +1,6 @@
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
 ARG RUBY_VERSION=3.2.2
-FROM --platform=$BUILDPLATFOR registry.docker.com/library/ruby:$RUBY_VERSION-slim AS base
+FROM --platform=$BUILDPLATFORM registry.docker.com/library/ruby:$RUBY_VERSION-slim AS base
 ARG TARGETPLATFORM
 
 # Rails app lives here
