@@ -1,8 +1,7 @@
-# syntax = docker/dockerfile:1
-
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
-ARG RUBY_VERSION=3.3.0
-FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
+ARG RUBY_VERSION=3.2.2
+FROM --platform=$BUILDPLATFOR registry.docker.com/library/ruby:$RUBY_VERSION-slim AS base
+ARG TARGETPLATFORM
 
 # Rails app lives here
 WORKDIR /rails
@@ -15,11 +14,17 @@ ENV RAILS_ENV="production" \
 
 
 # Throw-away build stage to reduce size of final image
-FROM base as build
+FROM --platform=$BUILDPLATFORM base AS build
+ARG TARGETPLATFORM
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libvips pkg-config
+    apt-get install --no-install-recommends -y \
+        build-essential \
+        git \
+        libvips \
+        pkg-config \
+        && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
@@ -35,12 +40,14 @@ RUN bundle exec bootsnap precompile app/ lib/
 
 
 # Final stage for app image
-FROM base
+FROM --platform=$BUILDPLATFORM base
+ARG TARGETPLATFORM
 
 # Install packages needed for deployment
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libsqlite3-0 libvips && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+    apt-get install --no-install-recommends -y \
+        curl libsqlite3-0 net-tools libvips \
+        && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 # Copy built artifacts: gems, application
 COPY --from=build /usr/local/bundle /usr/local/bundle
